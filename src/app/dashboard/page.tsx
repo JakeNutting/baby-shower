@@ -1,7 +1,5 @@
 "use server";
 
-import NewItem from "./budget/_components/new-account";
-import { OrganizationSwitcher } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { CircleDollarSign } from "lucide-react";
 import Link from "next/link";
@@ -13,7 +11,6 @@ export default async function Dashboard() {
         <div className="mx-auto max-w-screen-xl px-2 xl:px-0 py-10">
           <div className="flex justify-between items-center">
             <h4 className="text-xl font-semibold">Dashboard</h4>
-            <OrganizationSwitcher />
           </div>
           <h4 className="text-md mt-1">
             Your space to track and manage your organization.
