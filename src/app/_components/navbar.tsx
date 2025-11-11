@@ -17,7 +17,6 @@ import {
 import Link from "next/link";
 
 export async function Navbar() {
-  const currUser = await currentUser();
   return (
     <nav className="dark:bg-gray-900 shadow-sm">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between py-4 px-4 xl:px-0">
@@ -26,7 +25,7 @@ export async function Navbar() {
             href="/"
             className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
           >
-            Goalden
+            Baby Shower
           </Link>
         </div>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -39,44 +38,17 @@ export async function Navbar() {
                 Home
               </Link>
             </li>
-            {/* <li>
-              <a
-                href="#"
-                className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-              >
-                About
-              </a>
-            </li> */}
-            {/* <li>
-              <OrganizationSwitcher />
-            </li> */}
-            <SignedIn>
-              <li>
-                <Link
-                  href="/dashboard"
-                  className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-                >
-                  Dashboard
-                </Link>
-              </li>
-            </SignedIn>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <li className="flex items-center">
-              <UserButton></UserButton>
-            </li>
           </ul>
         </div>
         <div className="test text-dark md:hidden">
-          <MobileNavbar user={currUser}></MobileNavbar>
+          <MobileNavbar></MobileNavbar>
         </div>
       </div>
     </nav>
   );
 }
 
-export function MobileNavbar({ user }: { user: User | null }) {
+export function MobileNavbar() {
   return (
     <>
       <Sheet>
@@ -86,18 +58,18 @@ export function MobileNavbar({ user }: { user: User | null }) {
         <SheetContent>
           <SheetHeader>
           <div className="flex items-center my-4 mb-3 gap-3">
-            <SignedIn>
+            {/* <SignedIn>
               <UserButton afterSignOutUrl="/"></UserButton>
               <span className="font-semibold">Hello, {user?.firstName} {user?.lastName}</span>
-            </SignedIn>
-            <SignedOut>
+            </SignedIn> */}
+            {/* <SignedOut>
               <div className="flex flex-col w-full gap-3">
                 <h4 className="text-left">Sign in to get started</h4>
                 <Button variant={"outline"} size={"sm"}><SignInButton></SignInButton></Button>
               </div>
-            </SignedOut>
+            </SignedOut> */}
           </div>
-          <Button variant={"outline"} size="sm"><SignOutButton></SignOutButton></Button>
+          {/* <Button variant={"outline"} size="sm"><SignOutButton></SignOutButton></Button> */}
             <hr></hr>
           </SheetHeader>
           <SheetDescription>
@@ -124,19 +96,7 @@ export function MobileNavbar({ user }: { user: User | null }) {
                     </span>
                   </a>
                 </li>
-                <SignedIn>
-                  <li>
-                    <Link
-                      href="/dashboard"
-                      className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-                    >
-                      <span className="flex items-center gap-4 font-semibold text-lg">
-                        {" "}
-                        <LayoutDashboard></LayoutDashboard> Dashboard
-                      </span>
-                    </Link>
-                  </li>
-                </SignedIn>
+              
               </ul>
             </div>
           </SheetDescription>

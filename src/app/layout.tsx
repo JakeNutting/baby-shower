@@ -9,8 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Goalden",
-  description: "An all-in-one app to manage your goals.",
+  title: "Baby Shower",
+  description: "RSVP for Jake & Charity's baby shower",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -31,4 +31,3 @@ export default function RootLayout({
     </html>
   );
 }
-// NEED TO REDO CONVEX CRAP
