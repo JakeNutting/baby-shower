@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.9",
-    "@clerk/nextjs": "^5.1.2",
     "@hookform/resolvers": "^3.4.2",
     "@libsql/client": "^0.3.6",
     "@prisma/adapter-libsql": "^5.7.1",

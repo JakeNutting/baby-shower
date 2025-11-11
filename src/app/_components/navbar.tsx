@@ -6,12 +6,9 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { User, currentUser } from "@clerk/nextjs/server";
 import {
   BookOpenText,
   Home,
-  LayoutDashboard,
   Menu,
 } from "lucide-react";
 import Link from "next/link";
