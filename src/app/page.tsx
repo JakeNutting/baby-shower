@@ -15,7 +15,7 @@ import {
 export default function Home() {
   return (
     <>
-    <div className="relative min-h-screen w-full bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a]  px-4 overflow-hidden">
+    <div className="relative min-h-screen h-dvh w-full bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a]  px-4 overflow-hidden">
       <div className="px-4 py-10 md:px-64 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
@@ -38,7 +38,7 @@ export default function Home() {
       </div>
 
       {/* Glowing Moon */}
-      <div className="absolute top-10 right-16 w-16 h-16">
+      <div className="absolute top-16 right-16 w-16 h-16">
         <div className="moon-full w-full h-full rounded-full bg-yellow-200 shadow-[0_0_80px_20px_rgba(255,255,200,0.5)]"></div>
         <div className="moon-cut w-full h-full rounded-full bg-[#0b1e3a] absolute top-0 right-0 translate-x-1/4"></div>
       </div>
