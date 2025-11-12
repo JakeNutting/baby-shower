@@ -10,6 +10,8 @@ import {
   BookOpenText,
   Home,
   Menu,
+  PartyPopper,
+  ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -22,7 +24,7 @@ export async function Navbar() {
             href="/"
             className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
           >
-            Baby Shower
+            [In Progress]
           </Link>
         </div>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
@@ -55,18 +57,9 @@ export function MobileNavbar() {
         <SheetContent>
           <SheetHeader>
           <div className="flex items-center my-4 mb-3 gap-3">
-            {/* <SignedIn>
-              <UserButton afterSignOutUrl="/"></UserButton>
-              <span className="font-semibold">Hello, {user?.firstName} {user?.lastName}</span>
-            </SignedIn> */}
-            {/* <SignedOut>
-              <div className="flex flex-col w-full gap-3">
-                <h4 className="text-left">Sign in to get started</h4>
-                <Button variant={"outline"} size={"sm"}><SignInButton></SignInButton></Button>
-              </div>
-            </SignedOut> */}
+            <span className="font-semibold">Hi, stranger!</span>           
           </div>
-          {/* <Button variant={"outline"} size="sm"><SignOutButton></SignOutButton></Button> */}
+         
             <hr></hr>
           </SheetHeader>
           <SheetDescription>
@@ -74,12 +67,11 @@ export function MobileNavbar() {
               <ul className="mt-4 font-medium space-y-5 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
                   <a
-                    href="/"
-                    className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 bg-gray-100 dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
-                    aria-current="page"
+                    href="#"
+                    className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
                   >
                     <span className="flex items-center gap-4 font-semibold text-lg">
-                      <Home className="text-blue-700"></Home> Home
+                      <PartyPopper></PartyPopper> RSVP
                     </span>
                   </a>
                 </li>
@@ -89,7 +81,7 @@ export function MobileNavbar() {
                     className="block rounded px-3 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
                   >
                     <span className="flex items-center gap-4 font-semibold text-lg">
-                      <BookOpenText></BookOpenText> About
+                      <ShoppingBag></ShoppingBag> Registry
                     </span>
                   </a>
                 </li>
