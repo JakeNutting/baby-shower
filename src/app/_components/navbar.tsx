@@ -17,33 +17,34 @@ import Link from "next/link";
 
 export async function Navbar() {
   return (
-    <nav className="dark:bg-gray-900 shadow-sm">
-      <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between py-4 px-4 xl:px-0">
-        <div className="flex gap-2 items-center">
-          <Link
-            href="/"
-            className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
-          >
-            [In Progress]
-          </Link>
-        </div>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="mt-4 flex items-center font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
-            <li>
-              <Link
-                href="/"
-                className="block rounded bg-blue-700 px-3 py-2 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
-              >
-                Home
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="test text-dark md:hidden">
-          <MobileNavbar></MobileNavbar>
-        </div>
-      </div>
-    </nav>
+    // <nav className="dark:bg-gray-900 shadow-sm">
+    //   <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between py-4 px-4 xl:px-0">
+    //     <div className="flex gap-2 items-center">
+    //       <Link
+    //         href="/"
+    //         className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
+    //       >
+    //         [In Progress]
+    //       </Link>
+    //     </div>
+    //     <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+    //       <ul className="mt-4 flex items-center font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
+    //         <li>
+    //           <Link
+    //             href="/"
+    //             className="block rounded bg-blue-700 px-3 py-2 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
+    //           >
+    //             Home
+    //           </Link>
+    //         </li>
+    //       </ul>
+    //     </div>
+    //     <div className="test text-dark md:hidden">
+    //       <MobileNavbar></MobileNavbar>
+    //     </div>
+    //   </div>
+    // </nav>
+    ""
   );
 }
 
