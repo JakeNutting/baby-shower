@@ -7,15 +7,21 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
+  Calendar,
+  MapPin,
   Menu,
   PartyPopper,
   ShoppingBag,
 } from "lucide-react";
+import { Dancing_Script, Quicksand } from "next/font/google";
+
+const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
+const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Home() {
   return (
     <>
-    <div className="relative min-h-screen h-dvh w-full bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a]  px-4 overflow-hidden">
+    <div className={`${quicksand.className} relative min-h-screen h-dvh w-full bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] overflow-hidden`}>
       <div className="px-4 py-10 md:px-64 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
@@ -23,11 +29,13 @@ export default function Home() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="star twinkle" style={{ top: "10%", left: "15%", animationDelay: "0s" }} />
         <div className="star twinkle" style={{ top: "6%", left: "25%", animationDelay: "0s" }} />
-        <div className="star twinkle" style={{ top: "25%", left: "60%", animationDelay: "1s" }} />
-        <div className="star twinkle" style={{ top: "40%", left: "30%", animationDelay: "2s" }} />
+        <div className="star twinkle" style={{ top: "10%", right: "10%", animationDelay: "0s" }} />
+        <div className="star twinkle" style={{ top: "30%", left: "60%", animationDelay: "1s" }} />
+        <div className="star twinkle" style={{ top: "35%", left: "30%", animationDelay: "2s" }} />
         <div className="star twinkle" style={{ top: "60%", left: "80%", animationDelay: "0.5s" }} />
         <div className="star twinkle" style={{ top: "75%", left: "20%", animationDelay: "1.5s" }} />
         <div className="star twinkle" style={{ top: "85%", left: "50%", animationDelay: "0.8s" }} />
+        <div className="star twinkle" style={{ bottom: "35%", left: "15%", animationDelay: "0.8s" }} />
       </div>
 
       {/* Clouds */}
@@ -38,30 +46,32 @@ export default function Home() {
       </div>
 
       {/* Glowing Moon */}
-      <div className="absolute top-16 right-16 w-16 h-16">
-        <div className="moon-full w-full h-full rounded-full bg-yellow-200 shadow-[0_0_80px_20px_rgba(255,255,200,0.5)]"></div>
-        <div className="moon-cut w-full h-full rounded-full bg-[#0b1e3a] absolute top-0 right-0 translate-x-1/4"></div>
+      <div className="absolute top-12 right-16">
+        <div className="moon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center mt-20">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2 drop-shadow-lg">
+      <div className="relative z-10 flex flex-col items-center justify-center mt-16">
+        <p className="text-sm text-yellow-100 mb-2">
+          Kindly join Charity's baby shower honoring
+        </p>
+        <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg mb-4">
           LINCOLN ROBERT NUTTING
         </h1>
-        <p className="text-lg md:text-2xl text-gray-200 max-w-2xl mb-8">
-          Baby Shower
-        </p>
-        <a
-          href="#rsvp"
-          className="bg-yellow-200 hover:bg-yellow-300 text-gray-900 font-semibold py-3 px-6 rounded-full shadow-lg transition-all"
-        >
-          RSVP Now
-        </a>
       </div>
 
-      <div className="mt-20">
-        <h4 className="text-sm font-semibold text-white mb-2">Event Details</h4>
-        <p className="text-white">I go to sleep</p>
+      <div className="mt-14 mx-6">
+        <h4 className="text-xs font-semibold text-white mb-3">Event Details</h4>
+        <p className="text-white flex gap-2 items-center"><Calendar size={18}></Calendar>January 18, 2026 - 12:00 PM</p>
+        <p className="text-white flex gap-2 items-center mt-4"><MapPin size={18}></MapPin>Apple Creek Church</p>
+        <p className="text-white flex gap-2 text-xs items-center mt-1.5 ml-[26px]">269 West Main St. Apple Creek, OH 44606</p>
+      </div>
+      <div className="mt-14 w-1/3 rounded-tr-2xl rounded-br-sm bg-yellow-200 p-2 px-6 shadow-lg">
+        <h4 className="text-gray-900 text-xl font-semibold">RSVP</h4>
       </div>
 
       {/* Custom CSS */}
@@ -115,23 +125,71 @@ export default function Home() {
         }
 
         @keyframes drift {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(150vw); }
+          0% { transform: translateX(-50vw); }
+          100% { transform: translateX(200vw); }
         }
-        .moon-full {
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-        .moon-cut {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          background-color: #0b1e3a;
-        }
+
+         .moon {
+            width: 70px;   /* smaller size */
+            height: 70px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fdfdfd, #e0e0e0 40%, #b0b0b0 70%, #8a8a8a 100%);
+              box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.15),
+                0 0 40px 15px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+          }
+
+          /* Moon craters */
+          .moon::before,
+          .moon::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #b0b0b0, #8a8a8a);
+          }
+
+          .moon::before {
+            width: 14px;
+            height: 14px;
+            top: 18px;
+            left: 45px;
+          }
+
+          .moon::after {
+            width: 8px;
+            height: 8px;
+            top: 45px;
+            left: 20px;
+          }
+
+          /* Extra small craters */
+          .moon span {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, #b0b0b0, #8a8a8a);
+          }
+
+          .moon span:nth-child(1) {
+            width: 5px;
+            height: 5px;
+            top: 10px;
+            left: 15px;
+          }
+
+          .moon span:nth-child(2) {
+            width: 4px;
+            height: 4px;
+            top: 30px;
+            left: 30px;
+          }
+
+          .moon span:nth-child(3) {
+            width: 6px;
+            height: 6px;
+            top: 55px;
+            left: 50px;
+          }
       `}</style>
     </div>
       {/* <div className="bg-gradient-to-t from-[#faf7f2] via-[#e5e7eb] to-[#cfe4fa] min-h-screen">
@@ -173,7 +231,7 @@ function MobileNavbar() {
     <>
       <Sheet>
         <SheetTrigger asChild className="cursor-pointer hover:text-blue-700">
-          <Menu size={36} color="white" />
+          <Menu size={36} color="#fef08a"/>
         </SheetTrigger>
         <SheetContent side={"left"} className="bg-[#0d1f3c] text-white shadow-xl">
           <SheetHeader>
