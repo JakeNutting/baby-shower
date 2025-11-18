@@ -1,4 +1,5 @@
 "use client"
+import { Input } from "@/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -21,7 +22,7 @@ const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 export default function Home() {
   return (
     <>
-    <div className={`${quicksand.className} relative min-h-screen h-dvh w-full bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] overflow-hidden`}>
+    <div className={`${quicksand.className} relative min-h-screen h-dvh w-full overflow-y-auto bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] overflow-hidden`}>
       <div className="px-4 py-10 md:px-64 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
@@ -31,7 +32,8 @@ export default function Home() {
         <div className="star twinkle" style={{ top: "6%", left: "25%", animationDelay: "0s" }} />
         <div className="star twinkle" style={{ top: "10%", right: "10%", animationDelay: "0s" }} />
         <div className="star twinkle" style={{ top: "30%", left: "60%", animationDelay: "1s" }} />
-        <div className="star twinkle" style={{ top: "35%", left: "30%", animationDelay: "2s" }} />
+        <div className="star twinkle" style={{ top: "32%", left: "30%", animationDelay: "2s" }} />
+        <div className="star twinkle" style={{ top: "45%", left: "90%", animationDelay: "2s" }} />
         <div className="star twinkle" style={{ top: "60%", left: "80%", animationDelay: "0.5s" }} />
         <div className="star twinkle" style={{ top: "75%", left: "20%", animationDelay: "1.5s" }} />
         <div className="star twinkle" style={{ top: "85%", left: "50%", animationDelay: "0.8s" }} />
@@ -64,16 +66,32 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="mt-14 mx-6">
-        <h4 className="text-xs font-semibold text-white mb-3">Event Details</h4>
-        <p className="text-white flex gap-2 items-center"><Calendar size={18}></Calendar>January 18, 2026 - 12:00 PM</p>
-        <p className="text-white flex gap-2 items-center mt-4"><MapPin size={18}></MapPin>Apple Creek Church</p>
-        <p className="text-white flex gap-2 text-xs items-center mt-1.5 ml-[26px]">269 West Main St. Apple Creek, OH 44606</p>
+      <div className="bg-white/5 py-6 mt-14">
+        <div className="mx-6">
+          <h4 className="text-xs font-semibold text-white mb-4">Event Details</h4>
+          <p className="text-white flex gap-3 items-center"><Calendar size={18} color="#fef08a"></Calendar>January 18, 2026 - 12:00 PM</p>
+          <p className="text-white flex gap-3 items-center mt-5"><MapPin size={18} color="#fef08a"></MapPin>Apple Creek Church</p>
+          <p className="text-white flex gap-3 text-xs items-center mt-1.5 ml-[29px]">269 West Main St. Apple Creek, OH 44606</p>
+        </div>
+
       </div>
       <div className="mt-14 w-1/3 rounded-tr-2xl rounded-br-sm bg-yellow-200 p-2 px-6 shadow-lg">
         <h4 className="text-gray-900 text-xl font-semibold">RSVP</h4>
       </div>
 
+      <div className="mt-6 mx-4">
+         <Input type="text" placeholder="First Name" />
+         <div className="mt-6">
+          <Input type="text" placeholder="Last Name" />
+
+         </div>
+
+      </div>
+
+      <div className="p-72">
+        Test
+      </div>
+    </div>
       {/* Custom CSS */}
       <style jsx>{`
         .star {
@@ -191,7 +209,6 @@ export default function Home() {
             left: 50px;
           }
       `}</style>
-    </div>
       {/* <div className="bg-gradient-to-t from-[#faf7f2] via-[#e5e7eb] to-[#cfe4fa] min-h-screen">
         <div className="px-4 py-10 md:px-64">
           <MobileNavbar></MobileNavbar>
