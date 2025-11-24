@@ -79,8 +79,8 @@ export default function Home() {
           <p className="text-white flex gap-3 items-center mt-5"><MapPin size={18} color="#fef08a"></MapPin>Apple Creek Church</p>
           <p className="text-white flex gap-3 text-xs items-center mt-1.5 ml-[29px]">269 West Main St. Apple Creek, OH 44606</p>
         </div>
-
       </div>
+      
       <div className="
         w-[40%] mt-16
         rounded-tr-2xl rounded-br-sm 
@@ -95,54 +95,54 @@ export default function Home() {
       </div>
 
       <div className="mt-4 mx-4 py-4">
-          <Label className="text-white">Are you able to attend?</Label>
-          <div className="grid grid-cols-2 gap-3 my-8 mt-3">
-            <button
-              onClick={() => setIsAttending(true)}
-              className="
-                bg-white/10 backdrop-blur-md 
-                flex justify-center gap-1.5
-                border border-white/30
-                text-white font-medium
-                rounded-xl py-2.5
-                hover:bg-white/30 transition
-              "
-            >
-              Yes
-              { isAttending === true && (
-                  <CircleCheck className="text-yellow-100"></CircleCheck>
-                )
-              }
-            </button>
+          <Label htmlFor="email" className="text-white">Please enter your full name</Label>
+          <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
 
-            <button
-              onClick={() => setIsAttending(false)}
-              className="
-                bg-white/10 backdrop-blur-md
-                flex justify-center gap-1.5
-                border border-white/20
-                text-white/80 font-medium
-                rounded-xl py-2.5
-                hover:bg-white/20 transition
-              "
-            >
-              No
-              { isAttending === false && (
-                  <CircleCheck className="text-yellow-100"></CircleCheck>
-                )
-              }
-            </button>
+          <div className="mt-8">
+            <Label className="text-white">Are you able to attend?</Label>
+            <div className="grid grid-cols-2 gap-6 my-8 mt-3">
+              <button
+                onClick={() => setIsAttending(true)}
+                className={`
+                  backdrop-blur-md 
+                  flex justify-center gap-1.5
+                  border border-white/30
+                  text-white font-medium
+                  rounded-xl py-2.5
+                  transition
+                  ${isAttending ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                `}
+              >
+                Yes
+                { isAttending === true && (
+                    <CircleCheck className="text-yellow-200"></CircleCheck>
+                  )
+                }
+              </button>
+
+              <button
+                onClick={() => setIsAttending(false)}
+                className={`
+                  backdrop-blur-md 
+                  flex justify-center gap-1.5
+                  border border-white/30
+                  text-white font-medium
+                  rounded-xl py-2.5
+                  transition
+                  ${isAttending === false ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                `}
+              >
+                No
+                { isAttending === false && (
+                    <CircleCheck className="text-yellow-200"></CircleCheck>
+                  )
+                }
+              </button>
+            </div>
+
           </div>
-          {
-            isAttending && (
-              <>
-                <Label htmlFor="email" className="text-white">Please enter your full name</Label>
-                <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
-              </>
-            )
-          }
           <button 
-            className="w-full mt-4 bg-white/10 rounded-xl py-2 text-white font-semibold">
+            className="w-full mt-2 border border-white/30 text-white py-3 bg-white/10 rounded-xl font-semibold">
               Submit
           </button>
       </div>
