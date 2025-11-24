@@ -148,7 +148,7 @@ export default function Home() {
       </div>
 
       <div className="
-          mt-14 w-[40%]
+          mt-14 w-[40%] mb-36
           rounded-tr-2xl rounded-br-sm 
           bg-white/20
           backdrop-blur-md
