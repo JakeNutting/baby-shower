@@ -10,7 +10,6 @@ import {
 import { Label } from "@radix-ui/react-label";
 import {
   Calendar,
-  Check,
   CircleCheck,
   Gift,
   MapPin,
@@ -29,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-    <div className={`${quicksand.className} relative min-h-screen h-dvh w-full overflow-y-auto bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] overflow-hidden`}>
+    <div className={`${quicksand.className} relative min-h-[100dvh] w-full overflow-y-auto bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
       <div className="px-4 py-10 md:px-64 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
@@ -134,8 +133,18 @@ export default function Home() {
               }
             </button>
           </div>
-          <Label htmlFor="email" className="text-white">Please enter your full name</Label>
-          <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
+          {
+            isAttending && (
+              <>
+                <Label htmlFor="email" className="text-white">Please enter your full name</Label>
+                <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
+              </>
+            )
+          }
+          <button 
+            className="w-full mt-4 bg-white/10 rounded-xl py-2 text-white font-semibold">
+              Submit
+          </button>
       </div>
 
       <div className="
