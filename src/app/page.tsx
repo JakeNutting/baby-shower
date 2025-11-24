@@ -7,8 +7,10 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Label } from "@radix-ui/react-label";
 import {
   Calendar,
+  Gift,
   MapPin,
   Menu,
   PartyPopper,
@@ -66,7 +68,7 @@ export default function Home() {
         </h1>
       </div>
 
-      <div className="bg-white/5 py-6 mt-14">
+      <div className="bg-white/5 py-6 my-14">
         <div className="mx-6">
           <h4 className="text-xs font-semibold text-white mb-4">Event Details</h4>
           <p className="text-white flex gap-3 items-center"><Calendar size={18} color="#fef08a"></Calendar>January 18, 2026 - 12:00 PM</p>
@@ -75,17 +77,61 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="mt-14 w-1/3 rounded-tr-2xl rounded-br-sm bg-yellow-200 p-2 px-6 shadow-lg">
-        <h4 className="text-gray-900 text-xl font-semibold">RSVP</h4>
+      <div className="
+        w-[40%] mt-16
+        rounded-tr-2xl rounded-br-sm 
+        bg-white/20
+        backdrop-blur-md
+        shadow-lg
+        flex gap-2 items-center
+        p-2 px-6
+      ">
+        <PartyPopper className="text-yellow-200" />
+        <h4 className="text-white text-xl font-semibold">RSVP</h4>
       </div>
 
-      <div className="mt-6 mx-4">
-         <Input type="text" placeholder="First Name" />
-         <div className="mt-6">
-          <Input type="text" placeholder="Last Name" />
+      <div className="mt-4 mx-4 py-4">
+          <Label className="text-white">Are you able to attend?</Label>
+          <div className="grid grid-cols-2 gap-3 my-8 mt-3">
+            <button
+              className="
+                bg-white/20 backdrop-blur-md 
+                border border-white/30
+                text-white font-medium
+                rounded-xl py-2.5
+                hover:bg-white/30 transition
+              "
+            >
+              Yes
+            </button>
 
-         </div>
+            <button
+              className="
+                bg-white/10 backdrop-blur-md
+                border border-white/20
+                text-white/80 font-medium
+                rounded-xl py-2.5
+                hover:bg-white/20 transition
+              "
+            >
+              No
+            </button>
+          </div>
+          <Label htmlFor="email" className="text-white">Please enter your full name</Label>
+          <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
+      </div>
 
+       <div className="
+          mt-14 w-[40%]
+          rounded-tr-2xl rounded-br-sm 
+          bg-white/20
+          backdrop-blur-md
+          shadow-lg
+          flex gap-2 items-center
+          p-2 px-6
+        ">
+        <Gift className="text-yellow-200" />
+        <h4 className="text-white text-xl font-semibold">Registries</h4>
       </div>
 
       <div className="p-72">
