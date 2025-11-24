@@ -10,6 +10,8 @@ import {
 import { Label } from "@radix-ui/react-label";
 import {
   Calendar,
+  Check,
+  CircleCheck,
   Gift,
   MapPin,
   Menu,
@@ -17,11 +19,14 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { Dancing_Script, Quicksand } from "next/font/google";
+import { useState } from "react";
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Home() {
+  const [isAttending, setIsAttending] = useState<boolean | undefined>();
+
   return (
     <>
     <div className={`${quicksand.className} relative min-h-screen h-dvh w-full overflow-y-auto bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] overflow-hidden`}>
@@ -94,8 +99,10 @@ export default function Home() {
           <Label className="text-white">Are you able to attend?</Label>
           <div className="grid grid-cols-2 gap-3 my-8 mt-3">
             <button
+              onClick={() => setIsAttending(true)}
               className="
-                bg-white/20 backdrop-blur-md 
+                bg-white/10 backdrop-blur-md 
+                flex justify-center gap-1.5
                 border border-white/30
                 text-white font-medium
                 rounded-xl py-2.5
@@ -103,11 +110,17 @@ export default function Home() {
               "
             >
               Yes
+              { isAttending === true && (
+                  <CircleCheck className="text-yellow-100"></CircleCheck>
+                )
+              }
             </button>
 
             <button
+              onClick={() => setIsAttending(false)}
               className="
                 bg-white/10 backdrop-blur-md
+                flex justify-center gap-1.5
                 border border-white/20
                 text-white/80 font-medium
                 rounded-xl py-2.5
@@ -115,13 +128,17 @@ export default function Home() {
               "
             >
               No
+              { isAttending === false && (
+                  <CircleCheck className="text-yellow-100"></CircleCheck>
+                )
+              }
             </button>
           </div>
           <Label htmlFor="email" className="text-white">Please enter your full name</Label>
           <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
       </div>
 
-       <div className="
+      <div className="
           mt-14 w-[40%]
           rounded-tr-2xl rounded-br-sm 
           bg-white/20
@@ -134,9 +151,6 @@ export default function Home() {
         <h4 className="text-white text-xl font-semibold">Registries</h4>
       </div>
 
-      <div className="p-72">
-        Test
-      </div>
     </div>
       {/* Custom CSS */}
       <style jsx>{`
