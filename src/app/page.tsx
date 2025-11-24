@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-    <div className={`${quicksand.className} relative min-h-[100dvh] w-full overflow-y-auto bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
+    <div className={`${quicksand.className} relative min-h-[100dvh] w-full overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
       <div className="px-4 py-10 md:px-64 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
