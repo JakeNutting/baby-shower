@@ -136,11 +136,7 @@ const ConfettiButtonComponent = ({
     }
   }
 
-  return (
-    <Button onClick={handleClick} {...props}>
-      {children}
-    </Button>
-  )
+  
 }
 
 ConfettiButtonComponent.displayName = "ConfettiButton"

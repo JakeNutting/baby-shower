@@ -7,7 +7,6 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Label } from "@radix-ui/react-label";
 import {
   Calendar,
   CircleCheck,
@@ -28,7 +27,6 @@ import { z } from "zod";
 import { api } from "../../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { FormField, Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
-import { ConfettiButton } from "@/components/ui/confetti";
 import confetti from "canvas-confetti";
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
