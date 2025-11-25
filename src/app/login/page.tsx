@@ -11,12 +11,19 @@ import { api } from "../../../convex/_generated/api";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import MobileNavbar from "../_components/mobile-navbar";
+import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 export default function Login() {
 
     const formSchema = loginSchema;
-    const submitRsvp = useMutation(api.rsvp.login);
+    const checkLogin = useMutation(api.rsvp.checkLogin);
+
+    const [showInvalidState, setShowInvalidState] = useState<boolean>();
+
+    const router = useRouter();
     
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -31,13 +38,30 @@ export default function Login() {
         if (!values.email || !values.password) return;
 
         try {
-        await submitRsvp({
-            ...values
-        });
-            form.reset();
+            const result = await checkLogin({
+                ...values
+            });
+
+            debugger;
+
+            if (!result.success) {
+                setShowInvalidState(true);
+            } else {
+                toast({
+                    title: "Logged In",
+                    variant: "success",
+                    description: "You have logged in successfully",
+                });
+                form.reset();
+                router.push("/rsvps");
+            }
         } catch (err) {
-      
-    }
+              toast({
+                    title: "ERROR",
+                    variant: "destructive",
+                    description: "There has been an error"
+                });
+        }
   }
 
     return <>
@@ -132,19 +156,29 @@ export default function Login() {
                             </FormItem>
                         )}>
                     </FormField>
+                    {
+                        showInvalidState && (
+                            <>
+                                <div className="flex justify-center mt-2">
+                                    <p className="text-red-600 text-sm font-semibold">Invalid email or password</p>
+                                </div>
+                            </>
+                        )
+                    }
                     <div className="mt-2">
                         <button
                             type="submit"
                             disabled={form.formState.isSubmitting || !form.formState.isValid} 
                             className={`
-                            w-full border 
-                            mt-2 border-white/30 
-                            py-3 
-                            rounded-xl 
-                            font-semibold transition-colors
-                            bg-yellow-200/90 text-gray-800
-                            flex justify-center gap-2 items-center
-                            `}
+                                w-full border 
+                                mt-2 border-white/30 
+                                py-3 
+                                rounded-xl 
+                                font-semibold transition-colors
+                                bg-yellow-200/90 text-gray-800
+                                flex justify-center gap-2 items-center
+                                `
+                            }
                             >
                             Submit
                             {form.formState.isSubmitting && (
