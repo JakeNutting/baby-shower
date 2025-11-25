@@ -19,7 +19,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Dancing_Script, Quicksand } from "next/font/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { rsvpSchema } from "./schemas/rsvp-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -91,7 +91,6 @@ export default function Home() {
       });
       form.reset();
       setFormSubmitted(true);
-      setIsAttending(undefined);
       handleClick;
     } catch (err) {
       
@@ -251,11 +250,11 @@ export default function Home() {
                         className={`
                           w-full border 
                           mt-2 border-white/30 
-                          text-white py-3 
-                          bg-white/10 rounded-xl 
+                          py-3 
+                           rounded-xl 
                           font-semibold transition-colors
                           flex justify-center gap-2 items-center
-                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/95 text-gray-800'}
+                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed text-white bg-yellow-200/60' : 'bg-yellow-200 text-gray-800'}
                         `}
                         >
                         Submit
@@ -295,7 +294,10 @@ export default function Home() {
         
           <div className="mt-6">
             <button
-              onClick={() => setFormSubmitted(false)}
+              onClick={() => {
+                setFormSubmitted(false);
+                setIsAttending(undefined);
+              }}
               className="px-6 py-2 text-sm rounded-xl text-yellow-200 underline font-semibold"
             >
               RSVP for another person
@@ -336,7 +338,7 @@ export default function Home() {
         </div>
 
         {/* Amazon Registry */}
-        <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col items-center gap-4">
+        <div className="shadow-lg mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col items-center gap-4">
           <Image
             width={125}
             height={125}
