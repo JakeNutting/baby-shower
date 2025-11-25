@@ -28,6 +28,8 @@ import { api } from "../../convex/_generated/api";
 import { useMutation } from "convex/react";
 import { FormField, Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import confetti from "canvas-confetti";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
@@ -58,7 +60,7 @@ export default function Home() {
     const frame = () => {
       if (Date.now() > end) return
       confetti({
-        particleCount: 1,
+        particleCount: 1.5,
         angle: 60,
         spread: 55,
         startVelocity: 60,
@@ -67,7 +69,7 @@ export default function Home() {
         colors: colors,
       })
       confetti({
-        particleCount: 1,
+        particleCount: 1.5,
         angle: 120,
         spread: 55,
         startVelocity: 60,
@@ -89,6 +91,7 @@ export default function Home() {
       });
       form.reset();
       setFormSubmitted(true);
+      setIsAttending(undefined);
       handleClick;
     } catch (err) {
       
@@ -110,7 +113,7 @@ export default function Home() {
         <div className="star twinkle" style={{ top: "32%", left: "30%", animationDelay: "2s" }} />
         <div className="star twinkle" style={{ top: "45%", left: "90%", animationDelay: "2s" }} />
         <div className="star twinkle" style={{ top: "60%", left: "80%", animationDelay: "0.5s" }} />
-        <div className="star twinkle" style={{ top: "75%", left: "20%", animationDelay: "1.5s" }} />
+        <div className="star twinkle" style={{ top: "72%", left: "20%", animationDelay: "1.5s" }} />
         <div className="star twinkle" style={{ top: "85%", left: "50%", animationDelay: "0.8s" }} />
         <div className="star twinkle" style={{ bottom: "35%", left: "15%", animationDelay: "0.8s" }} />
       </div>
@@ -252,7 +255,7 @@ export default function Home() {
                           bg-white/10 rounded-xl 
                           font-semibold transition-colors
                           flex justify-center gap-2 items-center
-                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/90 text-gray-700'}
+                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/95 text-gray-800'}
                         `}
                         >
                         Submit
@@ -269,7 +272,7 @@ export default function Home() {
       )}
 
      {formSubmitted && (
-        <div className="relative w-full max-w-md mx-auto mt-6 p-6  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
+        <div className="relative w-full max-w-md mx-auto mt-10 p-6  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
           <div className="w-16 h-16 mb-4 rounded-full bg-white/80 flex items-center justify-center">
             <Sparkles className="text-[#0b1e3a] w-8 h-8" />
           </div>
@@ -278,14 +281,14 @@ export default function Home() {
             <>
               <h4 className="text-white text-xl font-semibold mb-2">We'll miss you!</h4>
               <p className="text-white/75 text-sm">
-                Thanks for submitting your RSVP. We hope you can celebrate with us in spirit!
+                Thanks for submitting your RSVP. We hope you can celebrate with us in spirit
               </p>
             </>
           ) : (
             <>
               <h4 className="text-white text-xl font-semibold mb-2">Can't wait to see you!</h4>
               <p className="text-white/75 text-sm">
-                Thanks for submitting your RSVP. We are so excited to celebrate together!
+                Thanks for submitting your RSVP. We are so excited to celebrate together
               </p>
             </>
           )}
@@ -293,7 +296,7 @@ export default function Home() {
           <div className="mt-6">
             <button
               onClick={() => setFormSubmitted(false)}
-              className="px-6 py-2 text-sm rounded-xl  text-yellow-200 underline font-semibold"
+              className="px-6 py-2 text-sm rounded-xl text-yellow-200 underline font-semibold"
             >
               RSVP for another person
             </button>
@@ -302,7 +305,7 @@ export default function Home() {
       )}
 
       <div className="
-          mt-14 w-[40%] mb-36
+          mt-12 w-[40%]
           rounded-tr-2xl rounded-br-sm 
           bg-white/20
           backdrop-blur-md
@@ -312,6 +315,43 @@ export default function Home() {
         ">
         <Gift className="text-yellow-200" />
         <h4 className="text-white text-xl font-semibold">Registries</h4>
+      </div>
+      <div className="p-4 mt-6 mb-8 flex flex-col md:flex-row gap-6 justify-center">
+        {/* Target Registry */}
+        <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pt-4 flex flex-col items-center gap-4">
+          <Image
+            width={50}
+            height={50}
+            alt="Target Logo"
+            src="Target_logo.svg"
+          />
+          <a
+            href="https://target.com/gift-registry/gift/baby-lincoln-nutting"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full text-center py-2 rounded-xl bg-yellow-200 text-[#0b1e3a] font-semibold"
+          >
+            View
+          </a>
+        </div>
+
+        {/* Amazon Registry */}
+        <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col items-center gap-4">
+          <Image
+            width={125}
+            height={125}
+            alt="Amazon Logo"
+            src="/Amazon_Logo.svg.png"
+          />
+          <a
+            href="https://www.amazon.com/baby-reg/charity-nutting-march-2026-wooster/26JCHED86U913"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full mt-1 text-center py-2 rounded-xl bg-yellow-200 text-[#0b1e3a] font-semibold"
+          >
+            View
+          </a>
+        </div>
       </div>
 
     </div>
