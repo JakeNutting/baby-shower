@@ -51,6 +51,9 @@ export default function Home() {
   });
 
   const handleClick = () => {
+
+    if (!isAttending) return;
+
     const end = Date.now() + 0.2 * 1000 // 3 seconds
     const colors = ["#fef08a"]
     const frame = () => {
@@ -60,7 +63,7 @@ export default function Home() {
         angle: 60,
         spread: 55,
         startVelocity: 60,
-        origin: { x: 0, y: 0.5 },
+        origin: { x: 0, y: 0.8 },
         shapes: ["star"],
         colors: colors,
       })
@@ -69,7 +72,7 @@ export default function Home() {
         angle: 120,
         spread: 55,
         startVelocity: 60,
-        origin: { x: 1, y: 0.5 },
+        origin: { x: 1, y: 0.8 },
         shapes: ["star"],
         colors: colors,
       })
@@ -147,7 +150,6 @@ export default function Home() {
           <p className="text-white flex gap-3 text-xs items-center mt-1.5 ml-[29px]">269 West Main St. Apple Creek, OH 44606</p>
         </div>
       </div>
-      
       <div className="
         w-[40%] mt-16
         rounded-tr-2xl rounded-br-sm 
@@ -161,120 +163,143 @@ export default function Home() {
         <h4 className="text-white text-xl font-semibold">RSVP</h4>
       </div>
       {!formSubmitted && (
-        <div className="mt-4 mx-4 py-4">
-            <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-8"
-                >
-                <FormField
-                  control={form.control}
-                    name="fullName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-white">Please enter your full name</FormLabel>
-                        <FormControl>
-                          <Input 
-                            className={`
-                              bg-white/15 backdrop-blur-sm 
-                              border mt-2 border-white/20 
-                              text-white placeholder:text-white/30
-                              text-[16px]
-                            `}
-                            {...field} 
-                            placeholder="Type your name here" 
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}>
-                </FormField>
-                <div className="my-8">
-                  <FormLabel className="text-white">Are you able to attend?</FormLabel>
-                  <div className="grid grid-cols-2 gap-6 my-8 mt-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsAttending(true);
-                        form.setValue('isAttending', true, {shouldValidate: true})
-                      }}
-                      className={`
-                        backdrop-blur-md 
-                        flex justify-center gap-1.5
-                        border border-white/30
-                        text-white font-medium
-                        rounded-xl py-2.5
-                        transition
-                        ${isAttending ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
-                      `}
-                    >
-                      Yes
-                      { isAttending === true && (
-                          <CircleCheck className="text-yellow-200"></CircleCheck>
-                        )
-                      }
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsAttending(false);
-                        form.setValue('isAttending', false, {shouldValidate: true})
-                      }}
-                      className={`
-                        backdrop-blur-md 
-                        flex justify-center gap-1.5
-                        border border-white/30
-                        text-white font-medium
-                        rounded-xl py-2.5
-                        transition
-                        ${isAttending === false ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
-                      `}
-                    >
-                      No
-                      { isAttending === false && (
-                          <CircleCheck className="text-yellow-200"></CircleCheck>
-                        )
-                      }
-                    </button>
-                  </div>
-                  <div className="mt-10">
-                    <button
-                      type="submit"
-                      onClick={handleClick}
-                      disabled={form.formState.isSubmitting || !form.formState.isValid} 
-                      className={`
-                        w-full border 
-                        mt-2 border-white/30 
-                        text-white py-3 
-                        bg-white/10 rounded-xl 
-                        font-semibold transition-colors
-                        flex justify-center gap-2 items-center
-                        ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/90 text-gray-700'}
-                      `}
+        <>
+          <div className="mt-4 mx-4 py-4">
+              <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                  >
+                  <FormField
+                    control={form.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">Please enter your full name</FormLabel>
+                          <FormControl>
+                            <Input 
+                              className={`
+                                bg-white/15 backdrop-blur-sm 
+                                border mt-2 border-white/20 
+                                text-white placeholder:text-white/30
+                                text-[16px]
+                              `}
+                              {...field} 
+                              placeholder="Type your name here" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}>
+                  </FormField>
+                  <div className="my-8">
+                    <FormLabel className="text-white">Are you able to attend?</FormLabel>
+                    <div className="grid grid-cols-2 gap-6 my-8 mt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAttending(true);
+                          form.setValue('isAttending', true, {shouldValidate: true})
+                        }}
+                        className={`
+                          backdrop-blur-md 
+                          flex justify-center gap-1.5
+                          border border-white/30
+                          text-white font-medium
+                          rounded-xl py-2.5
+                          transition
+                          ${isAttending ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                        `}
                       >
-                      Submit
-                      {form.formState.isSubmitting && (
-                        <Loader2 className="size-5 animate-spin text-yellow-200"></Loader2>
-                      )}
-                    </button>
+                        Yes
+                        { isAttending === true && (
+                            <CircleCheck className="text-yellow-200"></CircleCheck>
+                          )
+                        }
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsAttending(false);
+                          form.setValue('isAttending', false, {shouldValidate: true})
+                        }}
+                        className={`
+                          backdrop-blur-md 
+                          flex justify-center gap-1.5
+                          border border-white/30
+                          text-white font-medium
+                          rounded-xl py-2.5
+                          transition
+                          ${isAttending === false ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                        `}
+                      >
+                        No
+                        { isAttending === false && (
+                            <CircleCheck className="text-yellow-200"></CircleCheck>
+                          )
+                        }
+                      </button>
+                    </div>
+                    <div className="mt-10">
+                      <button
+                        type="submit"
+                        onClick={handleClick}
+                        disabled={form.formState.isSubmitting || !form.formState.isValid} 
+                        className={`
+                          w-full border 
+                          mt-2 border-white/30 
+                          text-white py-3 
+                          bg-white/10 rounded-xl 
+                          font-semibold transition-colors
+                          flex justify-center gap-2 items-center
+                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/90 text-gray-700'}
+                        `}
+                        >
+                        Submit
+                        {form.formState.isSubmitting && (
+                          <Loader2 className="size-5 animate-spin text-yellow-200"></Loader2>
+                        )}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </Form>
-        </div>
+                </form>
+              </Form>
+          </div>
+        </>
       )}
 
-      {formSubmitted && (
-        <>
-          {!isAttending && (
-            <h4>Thanks for submitting your RSVP. We will miss you!</h4>
+     {formSubmitted && (
+        <div className="relative w-full max-w-md mx-auto mt-6 p-6  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
+          <div className="w-16 h-16 mb-4 rounded-full bg-white/80 flex items-center justify-center">
+            <PartyPopper className="text-[#0b1e3a] w-8 h-8" />
+          </div>
+                
+          {!isAttending ? (
+            <>
+              <h4 className="text-white text-xl font-semibold mb-2">We'll miss you!</h4>
+              <p className="text-white/75 text-sm">
+                Thanks for submitting your RSVP. We hope you can celebrate with us in spirit!
+              </p>
+            </>
+          ) : (
+            <>
+              <h4 className="text-white text-xl font-semibold mb-2">Can't wait to see you!</h4>
+              <p className="text-white/75 text-sm">
+                Thanks for submitting your RSVP. We are so excited to celebrate together!
+              </p>
+            </>
           )}
-          {isAttending && (
-            <h4>Thanks for submitting your RSVP. We can't wait to see you!</h4>
-          )}
-
-        </>
+        
+          <div className="mt-6">
+            <button
+              onClick={() => setFormSubmitted(false)}
+              className="px-6 py-2 text-sm rounded-xl  text-yellow-200 underline font-semibold"
+            >
+              RSVP for another person
+            </button>
+          </div>
+        </div>
       )}
 
       <div className="
@@ -408,36 +433,6 @@ export default function Home() {
             left: 50px;
           }
       `}</style>
-      {/* <div className="bg-gradient-to-t from-[#faf7f2] via-[#e5e7eb] to-[#cfe4fa] min-h-screen">
-        <div className="px-4 py-10 md:px-64">
-          <MobileNavbar></MobileNavbar>
-        </div>
-        <div className="absolute inset-0">
-        <div className="star" style={{ top: "10%", left: "15%" }} />
-        <div className="star" style={{ top: "25%", left: "60%" }} />
-        <div className="star" style={{ top: "40%", left: "30%" }} />
-        <div className="star" style={{ top: "60%", left: "80%" }} />
-        <div className="star" style={{ top: "75%", left: "20%" }} />
-        <div className="star" style={{ top: "85%", left: "50%" }} />
-      </div>
-              <div className="absolute top-16 right-16 w-40 h-40 bg-yellow-200 rounded-full shadow-[0_0_80px_20px_rgba(255,255,200,0.5)] animate-pulse"></div>
-
-        <div className="relative z-10 flex flex-col items-center justify-center mt-24">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-lg">
-            LINCOLN ROBERT NUTTING 🌙
-          </h1>
-          <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mb-8">
-            Join us under the stars to celebrate this magical day ✨
-          </p>
-          <a
-            href="#rsvp"
-            className="bg-yellow-200 hover:bg-yellow-300 text-gray-900 font-semibold py-3 px-6 rounded-full shadow-lg transition-all"
-          >
-            RSVP Now
-          </a>
-        </div>
-
-      </div> */}
     </>
   );
 }
