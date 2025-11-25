@@ -137,6 +137,9 @@ export default function Home() {
         <div className="star twinkle" style={{ top: "72%", left: "20%", animationDelay: "1.5s" }} />
         <div className="star twinkle" style={{ top: "85%", left: "50%", animationDelay: "0.8s" }} />
         <div className="star twinkle" style={{ bottom: "35%", left: "15%", animationDelay: "0.8s" }} />
+        <div className="star twinkle" style={{ bottom: "20%", left: "46%", animationDelay: "0.8s" }} />
+        <div className="star twinkle" style={{ bottom: "10%", left: "86%", animationDelay: "0.8s" }} />
+        <div className="star twinkle" style={{ bottom: "5%", left: "3%", animationDelay: "0.8s" }} />
       </div>
 
       {/* Clouds */}
@@ -144,6 +147,7 @@ export default function Home() {
         <div className="cloud cloud1"></div>
         <div className="cloud cloud2"></div>
         <div className="cloud cloud3"></div>
+        <div className="cloud cloud4"></div>
       </div>
 
       {/* Glowing Moon */}
@@ -343,8 +347,8 @@ export default function Home() {
         {/* Target Registry */}
         <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pt-4 flex flex-col items-center gap-4">
           <Image
-            width={50}
-            height={50}
+            width={60}
+            height={60}
             alt="Target Logo"
             src="/Target_logo.svg"
           />
@@ -362,8 +366,8 @@ export default function Home() {
         <div className="shadow-lg mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col items-center gap-4">
           <Image
             className="my-1"
-            width={125}
-            height={125}
+            width={140}
+            height={140}
             alt="Amazon Logo"
             src="/Amazon_logo.svg.webp"
           />
@@ -377,9 +381,9 @@ export default function Home() {
           </a>
         </div>
       </div>
-       <footer className="w-full py-4 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} Nutting Baby Shower. All rights reserved.
-          </footer>
+      <footer className="w-full py-4 text-center text-gray-500 text-sm">
+        © {new Date().getFullYear()} Nutting Baby Shower. All rights reserved.
+      </footer>
     </div>
       {/* Custom CSS */}
       <style jsx>{`
@@ -429,6 +433,13 @@ export default function Home() {
           width: 250px;
           height: 80px;
           animation-duration: 75s;
+        }
+        .cloud4 {
+          top: 90%;
+          left: -25%;
+          width: 250px;
+          height: 80px;
+          animation-duration: 100s;
         }
 
         @keyframes drift {
