@@ -341,7 +341,7 @@ export default function Home() {
             width={125}
             height={125}
             alt="Amazon Logo"
-            src="/Amazon_Logo.png"
+            src="/Amazon_logo.svg.webp"
           />
           <a
             href="https://www.amazon.com/baby-reg/charity-nutting-march-2026-wooster/26JCHED86U913"
