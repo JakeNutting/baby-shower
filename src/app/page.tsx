@@ -15,8 +15,8 @@ import {
   MapPin,
   Menu,
   PartyPopper,
-  ShoppingBag,
   Sparkles,
+  User,
 } from "lucide-react";
 import { Dancing_Script, Quicksand } from "next/font/google";
 import { useEffect, useState } from "react";
@@ -29,18 +29,40 @@ import { useMutation } from "convex/react";
 import { FormField, Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import confetti from "canvas-confetti";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Home() {
   const [isAttending, setIsAttending] = useState<boolean | undefined>();
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>();
 
   const submitRsvp = useMutation(api.rsvp.submitRsvp);
 
   const formSchema = rsvpSchema;
+
+  // Load from localStorage on first render
+  useEffect(() => {
+    const stored = localStorage.getItem("formSubmitted");
+    const storedIsAttending = localStorage.getItem("isAttending");
+    if (stored !== null) {
+      setFormSubmitted(stored === "true");
+      setIsAttending(storedIsAttending === "true");
+    }
+  }, []);
+
+  // Update localStorage whenever formSubmitted changes
+  useEffect(() => {
+    if (formSubmitted === undefined) return;
+
+    localStorage.setItem("formSubmitted", String(formSubmitted));
+  }, [formSubmitted]);
+
+  useEffect(() => {
+    if (isAttending === undefined) return;
+
+    localStorage.setItem("isAttending", String(isAttending));
+  }, [isAttending]);
 
    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,7 +77,7 @@ export default function Home() {
 
     if (!isAttending) return;
 
-    const end = Date.now() + 0.2 * 1000 // 3 seconds
+    const end = Date.now() + 0.7 * 1000 // 3 seconds
     const colors = ["#fef08a"]
     const frame = () => {
       if (Date.now() > end) return
@@ -91,7 +113,7 @@ export default function Home() {
       });
       form.reset();
       setFormSubmitted(true);
-      handleClick;
+      handleClick();
     } catch (err) {
       
     }
@@ -152,7 +174,7 @@ export default function Home() {
         </div>
       </div>
       <div className="
-        w-[40%] mt-16
+        w-[42%] mt-16
         rounded-tr-2xl rounded-br-sm 
         bg-white/20
         backdrop-blur-md
@@ -245,7 +267,6 @@ export default function Home() {
                     <div className="mt-10">
                       <button
                         type="submit"
-                        onClick={handleClick}
                         disabled={form.formState.isSubmitting || !form.formState.isValid} 
                         className={`
                           w-full border 
@@ -254,12 +275,12 @@ export default function Home() {
                            rounded-xl 
                           font-semibold transition-colors
                           flex justify-center gap-2 items-center
-                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed text-white bg-yellow-200/60' : 'bg-yellow-200 text-gray-800'}
+                          ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed text-white bg-yellow-200/60' : 'bg-yellow-200/90 text-gray-800'}
                         `}
                         >
                         Submit
                         {form.formState.isSubmitting && (
-                          <Loader2 className="size-5 animate-spin text-yellow-200"></Loader2>
+                          <Loader2 className="size-5 animate-spin text-gray-800"></Loader2>
                         )}
                       </button>
                     </div>
@@ -271,7 +292,7 @@ export default function Home() {
       )}
 
      {formSubmitted && (
-        <div className="relative w-full max-w-md mx-auto mt-10 p-6  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
+        <div className="relative w-full max-w-md mx-auto mt-10 p-[31.2px]  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
           <div className="w-16 h-16 mb-4 rounded-full bg-white/80 flex items-center justify-center">
             <Sparkles className="text-[#0b1e3a] w-8 h-8" />
           </div>
@@ -307,7 +328,7 @@ export default function Home() {
       )}
 
       <div className="
-          mt-12 w-[40%]
+          mt-12 w-[42%]
           rounded-tr-2xl rounded-br-sm 
           bg-white/20
           backdrop-blur-md
@@ -318,7 +339,7 @@ export default function Home() {
         <Gift className="text-yellow-200" />
         <h4 className="text-white text-xl font-semibold">Registries</h4>
       </div>
-      <div className="p-4 mt-6 mb-8 flex flex-col md:flex-row gap-6 justify-center">
+      <div className="p-4 mt-6 mb-24 flex flex-col md:flex-row gap-6 justify-center">
         {/* Target Registry */}
         <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pt-4 flex flex-col items-center gap-4">
           <Image
@@ -331,7 +352,7 @@ export default function Home() {
             href="https://target.com/gift-registry/gift/baby-lincoln-nutting"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full text-center py-2 rounded-xl bg-yellow-200 text-[#0b1e3a] font-semibold"
+            className="w-full text-center py-2 rounded-xl bg-yellow-200/90 text-[#0b1e3a] font-semibold"
           >
             View
           </a>
@@ -340,6 +361,7 @@ export default function Home() {
         {/* Amazon Registry */}
         <div className="shadow-lg mt-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 flex flex-col items-center gap-4">
           <Image
+            className="my-1"
             width={125}
             height={125}
             alt="Amazon Logo"
@@ -349,13 +371,15 @@ export default function Home() {
             href="https://www.amazon.com/baby-reg/charity-nutting-march-2026-wooster/26JCHED86U913"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full mt-1 text-center py-2 rounded-xl bg-yellow-200 text-[#0b1e3a] font-semibold"
+            className="w-full mt-1 text-center py-2 rounded-xl bg-yellow-200/90 text-[#0b1e3a] font-semibold"
           >
             View
           </a>
         </div>
       </div>
-
+       <footer className="w-full py-4 text-center text-gray-500 text-sm">
+            © {new Date().getFullYear()} Nutting Baby Shower. All rights reserved.
+          </footer>
     </div>
       {/* Custom CSS */}
       <style jsx>{`
@@ -489,7 +513,7 @@ function MobileNavbar() {
         <SheetContent side={"left"} className="bg-[#0d1f3c] text-white shadow-xl">
           <SheetHeader>
           <div className="flex items-center my-4 mb-3 gap-3">
-            <span className="font-semibold">Hi, stranger!</span>           
+            <span className="font-semibold">Hi there</span>           
           </div>
           
             <hr></hr>
@@ -500,20 +524,10 @@ function MobileNavbar() {
                 <li>
                   <a
                     href="#"
-                    className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0"
-                  >
-                    <span className="flex items-center gap-4 font-semibold text-lg">
-                      <PartyPopper></PartyPopper> RSVP
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
                     className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 "
                   >
                     <span className="flex items-center gap-4 font-semibold text-lg">
-                      <ShoppingBag></ShoppingBag> Registry
+                      <User></User> Login
                     </span>
                   </a>
                 </li>
