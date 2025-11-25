@@ -12,6 +12,7 @@ import {
   Calendar,
   CircleCheck,
   Gift,
+  Loader2,
   MapPin,
   Menu,
   PartyPopper,
@@ -19,12 +20,78 @@ import {
 } from "lucide-react";
 import { Dancing_Script, Quicksand } from "next/font/google";
 import { useState } from "react";
+import { rsvpSchema } from "./schemas/rsvp-schema";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { api } from "../../convex/_generated/api";
+import { useMutation } from "convex/react";
+import { FormField, Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { ConfettiButton } from "@/components/ui/confetti";
+import confetti from "canvas-confetti";
 
 const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Home() {
   const [isAttending, setIsAttending] = useState<boolean | undefined>();
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+
+  const submitRsvp = useMutation(api.rsvp.submitRsvp);
+
+  const formSchema = rsvpSchema;
+
+   const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: "onChange",
+    defaultValues: {
+      fullName: "",
+      isAttending: undefined,
+    }
+  });
+
+  const handleClick = () => {
+    const end = Date.now() + 0.2 * 1000 // 3 seconds
+    const colors = ["#fef08a"]
+    const frame = () => {
+      if (Date.now() > end) return
+      confetti({
+        particleCount: 1,
+        angle: 60,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 0, y: 0.5 },
+        shapes: ["star"],
+        colors: colors,
+      })
+      confetti({
+        particleCount: 1,
+        angle: 120,
+        spread: 55,
+        startVelocity: 60,
+        origin: { x: 1, y: 0.5 },
+        shapes: ["star"],
+        colors: colors,
+      })
+      requestAnimationFrame(frame)
+    }
+    frame()
+  }
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!values.fullName || values.isAttending === undefined) return;
+
+    try {
+      await submitRsvp({
+        ...values
+      });
+      form.reset();
+      setFormSubmitted(true);
+      handleClick;
+    } catch (err) {
+      
+    }
+  }
 
   return (
     <>
@@ -93,59 +160,122 @@ export default function Home() {
         <PartyPopper className="text-yellow-200" />
         <h4 className="text-white text-xl font-semibold">RSVP</h4>
       </div>
+      {!formSubmitted && (
+        <div className="mt-4 mx-4 py-4">
+            <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-8"
+                >
+                <FormField
+                  control={form.control}
+                    name="fullName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">Please enter your full name</FormLabel>
+                        <FormControl>
+                          <Input 
+                            className={`
+                              bg-white/15 backdrop-blur-sm 
+                              border mt-2 border-white/20 
+                              text-white placeholder:text-white/30
+                              text-[16px]
+                            `}
+                            {...field} 
+                            placeholder="Type your name here" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}>
+                </FormField>
+                <div className="my-8">
+                  <FormLabel className="text-white">Are you able to attend?</FormLabel>
+                  <div className="grid grid-cols-2 gap-6 my-8 mt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsAttending(true);
+                        form.setValue('isAttending', true, {shouldValidate: true})
+                      }}
+                      className={`
+                        backdrop-blur-md 
+                        flex justify-center gap-1.5
+                        border border-white/30
+                        text-white font-medium
+                        rounded-xl py-2.5
+                        transition
+                        ${isAttending ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                      `}
+                    >
+                      Yes
+                      { isAttending === true && (
+                          <CircleCheck className="text-yellow-200"></CircleCheck>
+                        )
+                      }
+                    </button>
 
-      <div className="mt-4 mx-4 py-4">
-          <Label htmlFor="email" className="text-white">Please enter your full name</Label>
-          <Input type="text" placeholder="Type here"  className="bg-white/15 backdrop-blur-sm border mt-2 border-white/20 text-white placeholder-white/75 text-[16px]"/>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsAttending(false);
+                        form.setValue('isAttending', false, {shouldValidate: true})
+                      }}
+                      className={`
+                        backdrop-blur-md 
+                        flex justify-center gap-1.5
+                        border border-white/30
+                        text-white font-medium
+                        rounded-xl py-2.5
+                        transition
+                        ${isAttending === false ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
+                      `}
+                    >
+                      No
+                      { isAttending === false && (
+                          <CircleCheck className="text-yellow-200"></CircleCheck>
+                        )
+                      }
+                    </button>
+                  </div>
+                  <div className="mt-10">
+                    <button
+                      type="submit"
+                      onClick={handleClick}
+                      disabled={form.formState.isSubmitting || !form.formState.isValid} 
+                      className={`
+                        w-full border 
+                        mt-2 border-white/30 
+                        text-white py-3 
+                        bg-white/10 rounded-xl 
+                        font-semibold transition-colors
+                        flex justify-center gap-2 items-center
+                        ${!form.formState.isValid ? 'opacity-60 cursor-not-allowed' : 'bg-yellow-200/90 text-gray-700'}
+                      `}
+                      >
+                      Submit
+                      {form.formState.isSubmitting && (
+                        <Loader2 className="size-5 animate-spin text-yellow-200"></Loader2>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </Form>
+        </div>
+      )}
 
-          <div className="mt-8">
-            <Label className="text-white">Are you able to attend?</Label>
-            <div className="grid grid-cols-2 gap-6 my-8 mt-3">
-              <button
-                onClick={() => setIsAttending(true)}
-                className={`
-                  backdrop-blur-md 
-                  flex justify-center gap-1.5
-                  border border-white/30
-                  text-white font-medium
-                  rounded-xl py-2.5
-                  transition
-                  ${isAttending ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
-                `}
-              >
-                Yes
-                { isAttending === true && (
-                    <CircleCheck className="text-yellow-200"></CircleCheck>
-                  )
-                }
-              </button>
+      {formSubmitted && (
+        <>
+          {!isAttending && (
+            <h4>Thanks for submitting your RSVP. We will miss you!</h4>
+          )}
+          {isAttending && (
+            <h4>Thanks for submitting your RSVP. We can't wait to see you!</h4>
+          )}
 
-              <button
-                onClick={() => setIsAttending(false)}
-                className={`
-                  backdrop-blur-md 
-                  flex justify-center gap-1.5
-                  border border-white/30
-                  text-white font-medium
-                  rounded-xl py-2.5
-                  transition
-                  ${isAttending === false ? 'bg-white/20 text-yellow-200' : 'bg-white/10 hover:bg-white/30'}
-                `}
-              >
-                No
-                { isAttending === false && (
-                    <CircleCheck className="text-yellow-200"></CircleCheck>
-                  )
-                }
-              </button>
-            </div>
-
-          </div>
-          <button 
-            className="w-full mt-2 border border-white/30 text-white py-3 bg-white/10 rounded-xl font-semibold">
-              Submit
-          </button>
-      </div>
+        </>
+      )}
 
       <div className="
           mt-14 w-[40%] mb-36
@@ -311,6 +441,7 @@ export default function Home() {
     </>
   );
 }
+
 
 function MobileNavbar() {
   return (

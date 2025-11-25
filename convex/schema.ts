@@ -4,8 +4,8 @@ import { v } from "convex/values";
 export default defineSchema({
   rsvps: defineTable({
     _id: v.string(),
-    firstName: v.string(),
-    lastName: v.string()
+    fullName: v.string(),
+    isAttending: v.boolean()
   }),
 
   users: defineTable({
