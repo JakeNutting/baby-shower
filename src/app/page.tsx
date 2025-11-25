@@ -17,6 +17,7 @@ import {
   Menu,
   PartyPopper,
   ShoppingBag,
+  Sparkles,
 } from "lucide-react";
 import { Dancing_Script, Quicksand } from "next/font/google";
 import { useState } from "react";
@@ -272,7 +273,7 @@ export default function Home() {
      {formSubmitted && (
         <div className="relative w-full max-w-md mx-auto mt-6 p-6  bg-white/5 backdrop-blur-md shadow-lg flex flex-col items-center text-center">
           <div className="w-16 h-16 mb-4 rounded-full bg-white/80 flex items-center justify-center">
-            <PartyPopper className="text-[#0b1e3a] w-8 h-8" />
+            <Sparkles className="text-[#0b1e3a] w-8 h-8" />
           </div>
                 
           {!isAttending ? (
