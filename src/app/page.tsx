@@ -323,7 +323,7 @@ export default function Home() {
             width={50}
             height={50}
             alt="Target Logo"
-            src="Target_logo.svg"
+            src="/Target_logo.svg"
           />
           <a
             href="https://target.com/gift-registry/gift/baby-lincoln-nutting"
@@ -341,7 +341,7 @@ export default function Home() {
             width={125}
             height={125}
             alt="Amazon Logo"
-            src="/Amazon_Logo.svg.png"
+            src="/Amazon_Logo.png"
           />
           <a
             href="https://www.amazon.com/baby-reg/charity-nutting-march-2026-wooster/26JCHED86U913"
