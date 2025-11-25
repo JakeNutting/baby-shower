@@ -17,3 +17,20 @@ export const submitRsvp = mutation({
     });
   },
 });
+
+export const login = mutation({
+  args: {
+    email: v.string(),
+    password: v.string()
+  },
+  async handler(ctx, args) {
+    if (!args.email || !args.password) {
+      throw new ConvexError("You must be logged in to create an account");
+    }
+
+    await ctx.db.insert("users", {
+      email: args.email,
+      password: args.password,
+    });
+  },
+});

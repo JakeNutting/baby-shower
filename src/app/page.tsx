@@ -1,24 +1,15 @@
 "use client"
 import { Input } from "@/components/ui/input";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import {
   Calendar,
   CircleCheck,
   Gift,
   Loader2,
   MapPin,
-  Menu,
   PartyPopper,
   Sparkles,
-  User,
 } from "lucide-react";
-import { Dancing_Script, Quicksand } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { useEffect, useState } from "react";
 import { rsvpSchema } from "./schemas/rsvp-schema";
 import { useForm } from "react-hook-form";
@@ -29,8 +20,8 @@ import { useMutation } from "convex/react";
 import { FormField, Form, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import confetti from "canvas-confetti";
 import Image from "next/image";
+import MobileNavbar from "./_components/mobile-navbar";
 
-const dancingScript = Dancing_Script({ subsets: ['latin'], weight: ['400', '700'] });
 const quicksand = Quicksand({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Home() {
@@ -387,167 +378,8 @@ export default function Home() {
     </div>
       {/* Custom CSS */}
       <style jsx>{`
-        .star {
-          position: absolute;
-          width: 3px;
-          opacity: 1;
-          height: 3px;
-          background-color: white;
-          border-radius: 50%;
-          box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.6);
-        }
-
-        /* Twinkle animation */
-        .twinkle {
-          animation: twinkle 3s infinite ease-in-out;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
-        }
-
-        /* Clouds */
-        .cloud {
-          position: absolute;
-          background: rgba(255, 255, 255, 0.15);
-          border-radius: 50%;
-          filter: blur(40px);
-          animation: drift 60s linear infinite;
-        }
-        .cloud1 {
-          top: 20%;
-          left: -20%;
-          width: 300px;
-          height: 100px;
-        }
-        .cloud2 {
-          top: 50%;
-          left: -30%;
-          width: 400px;
-          height: 120px;
-          animation-duration: 90s;
-        }
-        .cloud3 {
-          top: 70%;
-          left: -25%;
-          width: 250px;
-          height: 80px;
-          animation-duration: 75s;
-        }
-        .cloud4 {
-          top: 90%;
-          left: -25%;
-          width: 250px;
-          height: 80px;
-          animation-duration: 100s;
-        }
-
-        @keyframes drift {
-          0% { transform: translateX(-50vw); }
-          100% { transform: translateX(200vw); }
-        }
-
-         .moon {
-            width: 70px;   /* smaller size */
-            height: 70px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #fdfdfd, #e0e0e0 40%, #b0b0b0 70%, #8a8a8a 100%);
-              box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.15),
-                0 0 40px 15px rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-          }
-
-          /* Moon craters */
-          .moon::before,
-          .moon::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, #b0b0b0, #8a8a8a);
-          }
-
-          .moon::before {
-            width: 14px;
-            height: 14px;
-            top: 18px;
-            left: 45px;
-          }
-
-          .moon::after {
-            width: 8px;
-            height: 8px;
-            top: 45px;
-            left: 20px;
-          }
-
-          /* Extra small craters */
-          .moon span {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, #b0b0b0, #8a8a8a);
-          }
-
-          .moon span:nth-child(1) {
-            width: 5px;
-            height: 5px;
-            top: 10px;
-            left: 15px;
-          }
-
-          .moon span:nth-child(2) {
-            width: 4px;
-            height: 4px;
-            top: 30px;
-            left: 30px;
-          }
-
-          .moon span:nth-child(3) {
-            width: 6px;
-            height: 6px;
-            top: 55px;
-            left: 50px;
-          }
+        
       `}</style>
-    </>
-  );
-}
-
-
-function MobileNavbar() {
-  return (
-    <>
-      <Sheet>
-        <SheetTrigger asChild className="cursor-pointer hover:text-blue-700">
-          <Menu size={36} color="#fef08a"/>
-        </SheetTrigger>
-        <SheetContent side={"left"} className="bg-[#0d1f3c] text-white shadow-xl">
-          <SheetHeader>
-          <div className="flex items-center my-4 mb-3 gap-3">
-            <span className="font-semibold">Hi there</span>           
-          </div>
-          
-            <hr></hr>
-          </SheetHeader>
-          <SheetDescription>
-            <div className="mt-8">
-              <ul className="mt-4 font-medium space-y-5 dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:space-x-8 md:border-0 text-white md:p-0 md:dark:bg-gray-900">
-                <li>
-                  <a
-                    href="#"
-                    className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 "
-                  >
-                    <span className="flex items-center gap-4 font-semibold text-lg">
-                      <User></User> Login
-                    </span>
-                  </a>
-                </li>
-              
-              </ul>
-            </div>
-          </SheetDescription>
-        </SheetContent>
-      </Sheet>
     </>
   );
 }
