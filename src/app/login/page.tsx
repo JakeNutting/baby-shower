@@ -66,7 +66,7 @@ export default function Login() {
 
     return <>
         <div className={`${quicksand.className} relative min-h-[100dvh] w-full overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
-            <div className="px-4 py-10 md:px-64 z-50">
+            <div className="px-4 py-10 lg:px-64 z-50">
                 <MobileNavbar></MobileNavbar>
             </div>
             {/* Custom Static Stars */}
@@ -90,7 +90,7 @@ export default function Login() {
             </div>
     
             {/* Glowing Moon */}
-            <div className="absolute top-12 right-16">
+            <div className="absolute top-12 right-16 lg:right-60">
             <div className="moon">
                 <span></span>
                 <span></span>

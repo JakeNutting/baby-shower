@@ -142,7 +142,7 @@ export default function Home() {
       </div>
 
       {/* Glowing Moon */}
-      <div className="absolute top-12 right-16">
+      <div className="absolute top-12 right-16 md:right-60">
         <div className="moon">
           <span></span>
           <span></span>

@@ -19,6 +19,15 @@ export const submitRsvp = mutation({
   },
 });
 
+export const getRsvps = query({
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("rsvps")
+      .order("desc")
+      .collect();
+  },
+});
+
 export const checkLogin = mutation({
   args: {
     email: v.string(),
