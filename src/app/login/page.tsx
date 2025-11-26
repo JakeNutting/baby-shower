@@ -47,11 +47,6 @@ export default function Login() {
             if (!result.success) {
                 setShowInvalidState(true);
             } else {
-                toast({
-                    title: "Logged In",
-                    variant: "success",
-                    description: "You have logged in successfully",
-                });
                 form.reset();
                 router.push("/rsvps");
             }
@@ -99,7 +94,7 @@ export default function Login() {
             </div>
     
             {/* Hero Content */}
-           <div className="relative z-10 flex flex-col items-center justify-center mt-24">
+           <div className="relative z-10 flex flex-col items-center justify-center mt-12">
                 <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg mb-1">
                     LOGIN
                 </h1>
