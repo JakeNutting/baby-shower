@@ -112,8 +112,8 @@ export default function Home() {
 
   return (
     <>
-    <div className={`${quicksand.className} relative min-h-[100dvh] w-full overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
-      <div className="px-4 py-10 md:px-64 z-50">
+    <div className={`${quicksand.className} relative lg:px-40 xl:px-80 2xl:px-96 min-h-[100dvh] w-full overflow-y-auto overflow-x-hidden bg-gradient-to-b from-[#0b1e3a] to-[#1a3a5a] pb-[env(safe-area-inset-bottom)]`}>
+      <div className="px-4 py-10 z-50">
           <MobileNavbar></MobileNavbar>
       </div>
       {/* Custom Static Stars */}
@@ -334,7 +334,7 @@ export default function Home() {
         <Gift className="text-yellow-200" />
         <h4 className="text-white text-xl font-semibold">Registries</h4>
       </div>
-      <div className="p-4 mt-6 mb-24 flex flex-col md:flex-row gap-6 justify-center">
+      <div className="p-4 mt-6 mb-24 flex flex-col gap-6 justify-center md:justify-normal">
         {/* Target Registry */}
         <div className="shadow-lg bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 pt-4 flex flex-col items-center gap-4">
           <Image
