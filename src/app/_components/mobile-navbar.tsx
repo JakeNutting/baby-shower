@@ -5,9 +5,23 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { HomeIcon, Menu, User } from "lucide-react";
+import { HomeIcon, Menu, PartyPopper, User } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function MobileNavbar() {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+    useEffect(() => {
+            const userId = localStorage.getItem("userId");
+            const expiresAt = Number(localStorage.getItem("expiresAt") || 0);
+    
+            if (!userId || Date.now() > expiresAt) {
+                setIsLoggedIn(false);
+                return;
+            }
+
+            setIsLoggedIn(true);
+        }, []);
   return (
     <>
       <Sheet>
@@ -34,18 +48,43 @@ export default function MobileNavbar() {
                       <HomeIcon></HomeIcon> Home
                     </span>
                   </a>
+
+                {/* Don't show logged in button if logged in */}
                 </li>
-                <li>
-                  <a
-                    href="/login"
-                    className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0"
-                  >
-                    <span className="flex items-center gap-4 font-semibold text-lg">
-                      <User></User> Login
-                    </span>
-                  </a>
-                </li>
-              
+                {
+                    !isLoggedIn && (
+                        <>
+                            <li>
+                            <a
+                                href="/login"
+                                className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0"
+                            >
+                                <span className="flex items-center gap-4 font-semibold text-lg">
+                                <User></User> Login
+                                </span>
+                            </a>
+                            </li>
+                        </>
+                    )
+                }
+
+                {/* Show rsvp list button if logged in */}
+                {
+                    isLoggedIn && (
+                         <>
+                            <li>
+                                <a
+                                    href="/rsvps"
+                                    className="block rounded px-3 py-2  dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0"
+                                >
+                                    <span className="flex items-center gap-4 font-semibold text-lg">
+                                    <PartyPopper></PartyPopper> Rsvps
+                                    </span>
+                                </a>
+                            </li>
+                        </>
+                    )
+                }
               </ul>
             </div>
           </SheetDescription>

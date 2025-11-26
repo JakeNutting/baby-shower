@@ -42,12 +42,13 @@ export default function Login() {
                 ...values
             });
 
-            debugger;
-
             if (!result.success) {
                 setShowInvalidState(true);
             } else {
                 form.reset();
+                const expiresAt = Date.now() + 1000 * 60 * 30;
+                localStorage.setItem("userId", result.userId ?? "");
+                localStorage.setItem("expiresAt", expiresAt.toString());
                 router.push("/rsvps");
             }
         } catch (err) {
